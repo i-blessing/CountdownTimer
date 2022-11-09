@@ -1,0 +1,56 @@
+<h1 id="tableLabel">Countdown timer</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!inventory"><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
+
+<p *ngIf="inventory">Number of inventory rows found: {{ inventory.items.length }}</p>
+<table *ngIf="inventory" class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Description</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of inventory.items">
+      <td>{{ item.id }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.count }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+<p *ngIf="!timers"><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
+
+<p *ngIf="timers">Number of timers rows found: {{ timers.length }}</p>
+<table *ngIf="timers" class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Is Running</th>
+      <th>Duration</th>
+      <th>Start</th>
+      <th>Time left</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let timer of timers">
+      <td>{{ timer.id }}</td>
+      <td>{{ timer.name }}</td>
+      <td>{{ timer.isRunning }}</td>
+      <td>{{ timer.duration }}</td>
+      <td>
+        <button *ngIf="!timer.isRunning && !timer.countDown" (click)="startTimer(timer)">start</button>
+        <span>
+          <img *ngIf="timer.isRunning" width="40" height="26" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+          <i *ngIf="timer.isDone" class="bi bi-check"></i>
+        </span>
+
+      </td>
+      <td><span *ngIf="timer.countDown">{{ timer.countDown }}</span></td>
+    </tr>
+  </tbody>
+</table>
